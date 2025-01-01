@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stray Animal Rescue</title>
+    <style>
+        body {
+        background-image: url('media/strayanimal.jpg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        p{
+            color: #000000;
+        }
+        h2{
+            color: #000000;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 10px;
+            border: 3px solid #000000;
+            background-color: #fff;
+        }
+        input, textarea {
+            width: 40%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .post {
+            border: 1px solid #000000;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #fff;
+        }
+
+        .button {
+            opacity: 70%;
+            text-decoration: none;
+            margin-top: 20px;
+            margin-left: 7px;
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: rgb(69, 69, 69);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 1s,box-shadow 1s;
+        }
+        .button:hover {
+            background-color: #c3ff00;
+            text-decoration: none;
+            box-shadow: 5px 5px 0 black;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Stray Animal Rescue</h1>
+    <p>Help stray animals in your neighborhood by sharing their stories.</p>
+
+    <form id="animalForm">
+        <h3>Report a Stray Animal</h3>
+        <input type="text" id="animalName" placeholder="Animal Name" required>
+        <input type="text" id="location" placeholder="Location" required>
+        <textarea id="description" placeholder="Description" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+    <div>
+        <a href="home.html" class="button">Home</a>
+        <a href="reported.html" class="button">View Reported Strays</a>
+    </div>
+
+    
+    <script>
+        document.getElementById('animalForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const animalName = document.getElementById('animalName').value;
+            const location = document.getElementById('location').value;
+            const description = document.getElementById('description').value;
+    
+            const newAnimal = { name: animalName, location, description };
+    
+            const reportedAnimals = JSON.parse(localStorage.getItem('reportedAnimals')) || [];
+            reportedAnimals.push(newAnimal);
+    
+            localStorage.setItem('reportedAnimals', JSON.stringify(reportedAnimals));
+    
+            document.getElementById('animalForm').reset();
+    
+            alert('Animal report submitted! You can view it on the "Reported Strays" page.');
+        });
+    </script>
+    
+</body>
+</html>

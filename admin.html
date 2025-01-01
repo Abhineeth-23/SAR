@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Clear Reports</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            font-size: larger;
+            display: inline-block;
+            text-align: left;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        input {
+            display: block;
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #d9534f;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #c9302c;
+        }
+
+        p {
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .button2 {
+            opacity: 70%;
+            text-decoration: none;
+            margin-top: 20px;
+            margin-left: 7px;
+            padding: 10px 20px;
+            background-color: #00ff00;
+            color: rgb(69, 69, 69);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 1s,box-shadow 1s;
+        }
+        .button2:hover {
+            background-color: #c3ff00;
+            text-decoration: none;
+            box-shadow: 5px 5px 0 black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Admin Page</h1>
+    <form id="adminForm">
+        <label for="passkey">Enter Passkey</label>
+        <input type="password" id="passkey" placeholder="6-digit passkey" maxlength="6" required>
+        <button type="submit">Clear Data</button>
+    </form>
+    <p id="message"></p>
+
+    <a href="home.html" class="button2">Home</a>
+    <a href="reported.html" class="button2">Reported</a>
+
+    <script>
+        // Define the correct passkey
+        const correctPasskey = "230406"; 
+
+        // Handle form submission
+        document.getElementById('adminForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const enteredPasskey = document.getElementById('passkey').value;
+
+            if (enteredPasskey === correctPasskey) {
+                // Clear the data
+                localStorage.removeItem('reportedAnimals');
+                document.getElementById('message').textContent = 'All reported data has been cleared!';
+                document.getElementById('message').style.color = 'green';
+            } else {
+                // Incorrect passkey
+                document.getElementById('message').textContent = 'Incorrect passkey. Access denied.';
+                document.getElementById('message').style.color = 'red';
+            }
+
+            // Clear the input field
+            document.getElementById('passkey').value = '';
+        });
+    </script>
+</body>
+</html>
